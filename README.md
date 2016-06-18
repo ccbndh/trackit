@@ -7,7 +7,8 @@ In the first time:
 2. docker-compose up -d   
 
 Follow the status task in container:   
-```celery flower --broker=amqp://guest:guest@rabbitmq//```
+```celery flower --broker=amqp://guest:guest@rabbitmq//```   
+And see all task status in: http://192.168.99.100:5555/
 
 http://192.168.99.100:8000/
 
