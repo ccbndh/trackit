@@ -1,0 +1,16 @@
+language: python
+sudo: required
+group: edge
+dist: trusty
+services:
+  - docker
+install:
+  - pip install docker-compose
+  - pip install coveralls
+script:
+  - docker -v
+  - docker-compose -v
+  - docker-compose up -d
+  - docker-compose run web python manage.py test
+  - docker-compose run web coverage run --source=instagram manage.py test
+after_success: docker-compose run web coveralls
