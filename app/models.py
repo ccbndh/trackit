@@ -102,3 +102,6 @@ class Event(models.Model):
     original_location = models.CharField(max_length=500, null=True, blank=True)
     additional_params = JSONField(null=True, blank=True)
     parsed_event_time = models.DateTimeField(null=True)
+
+    def __str__(self):
+        return unicode(self.original_event_type)
