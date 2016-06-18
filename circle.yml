@@ -6,13 +6,11 @@ machine:
 
 dependencies:
   override:
-    - sudo sh -c "curl -L https://github.com/docker/compose/releases/download/1.7.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose"
+    - sudo sh -c "curl -L https://github.com/docker/compose/releases/download/1.4.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose"
     - sudo chmod +x /usr/local/bin/docker-compose
 
 test:
   pre:
     - docker-compose up -d
-    - docker-compose run web python manage.py migrate
-    - docker-compose run web python manage.py celeryd
   override:
     - docker-compose run web python manage.py test
