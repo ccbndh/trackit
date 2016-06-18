@@ -38,7 +38,7 @@ class CarrierMasterData(models.Model):
         db_table = "carrier"
 
     name = models.CharField(max_length=500, null=True)
-    slug_name = models.CharField(max_length=500, null=True)
+    slug_name = models.CharField(max_length=500, null=True, unique=True)
     carrier_id = models.CharField(max_length=100, unique=True)
     carrier_url = models.CharField(max_length=200, null=True, blank=True)
     carrier_url_tracking = models.CharField(max_length=200, null=True, blank=True)
@@ -86,3 +86,19 @@ class Parcel(models.Model):
 
     def __str__(self):
         return unicode(self.parcel_id)
+
+
+@python_2_unicode_compatible  # only if you need to support Python 2
+class Event(models.Model):
+    class Meta:
+        db_table = "event"
+        unique_together = ('parcel', 'original_event_type',
+                           'parsed_event_time', 'original_location')
+
+    parcel = models.ForeignKey(Parcel, db_constraint=False)
+    carrier = models.ForeignKey(CarrierMasterData, null=True, db_constraint=False)
+    original_event_type = models.CharField(max_length=500, null=True, blank=True)
+    original_time = models.CharField(max_length=500, null=True, blank=True)
+    original_location = models.CharField(max_length=500, null=True, blank=True)
+    additional_params = JSONField(null=True, blank=True)
+    parsed_event_time = models.DateTimeField(null=True)

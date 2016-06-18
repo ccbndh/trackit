@@ -1,5 +1,5 @@
 # Tracking parcel
-# Tech stack: Django, celery (async result), redis
+# Tech stack: Django, celery (async result), rabbitmq
 
 How to run with docker:
 In the first time:   
