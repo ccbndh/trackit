@@ -4,6 +4,8 @@ services:
     image: rabbitmq
   db:
     image: postgres
+    ports:
+      - "5432:5432"
   web:
     build: .
     environment:

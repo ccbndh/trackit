@@ -15,5 +15,4 @@ ADD requirements.txt /code/
 RUN pip install -r requirements.txt
 ADD . /code/
 
-EXPOSE 22 80
 CMD ["/usr/bin/supervisord"]
