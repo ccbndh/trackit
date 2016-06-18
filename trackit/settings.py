@@ -17,6 +17,10 @@ djcelery.setup_loader()
 # Celery config
 BROKER_URL = 'amqp://guest:guest@rabbitmq//'
 
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
