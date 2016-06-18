@@ -16,12 +16,8 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
   - docker-compose -v
   - docker -v
-install:
-  - pip install coveralls
 script:
   - docker -v
   - docker-compose -v
   - docker-compose up -d
   - docker-compose run web python manage.py test
-  - docker-compose run web coverage run --source=instagram manage.py test
-after_success: docker-compose run web coveralls
