@@ -1,5 +1,5 @@
 """
-WSGI config for django_celery_async_result project.
+WSGI config for trackit project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "django_celery_async_result.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "trackit.settings")
 
 application = get_wsgi_application()
