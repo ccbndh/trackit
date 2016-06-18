@@ -42,7 +42,7 @@ class TaskList(APIView):
               type: json
               paramType: body
               description: "`parcel_id`"
-              defaultValue: '{"parcel_id": "EL745355158VN"}'
+              defaultValue: '{"parcel_id": "30929083467443"}'
         response_serializer: ''
         responseMessages:
             - code: 400
