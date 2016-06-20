@@ -17,6 +17,4 @@ script:
   - docker-compose build
   - docker-compose up -d
   - sleep 5
-  - docker inspect trackit_db_1
-  - nc -vz 172.18.0.2 5432
-  - docker exec trackit_web_1 python manage.py test --settings=trackit.settings_test
+  - docker exec trackit_web_1 python manage.py test
