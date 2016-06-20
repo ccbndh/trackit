@@ -25,5 +25,4 @@ def task_get_data_from_spider(parcel_id):
 def task_success_handler(result, *args, **kwargs):
     logger.debug("{} {}".format('task_success', 'task_success'))
     logger.debug("{} {}".format('task_success', result))
-    print 'aaaa'
-    print result.get('info_parcel')
+    print result.get('parcel')

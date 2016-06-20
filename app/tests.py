@@ -13,5 +13,5 @@ class AddTestCase(TestCase):
         parcel_id = 'EL745355158VN'
         result = task_get_data_from_spider.delay(parcel_id)
         self.assertTrue(result.successful())
-        parcel_id_res = result.result.get('info_parcel').get('id')
+        parcel_id_res = result.result.get('parcel').get('id')
         self.assertEqual(parcel_id, parcel_id_res, "Should return 12 on add string 1 and 2")
