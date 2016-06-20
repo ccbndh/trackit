@@ -162,13 +162,13 @@ LOGGING = {
         'file_system': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': 'logs/trackit_everything.log',
+            'filename': '/var/log/code/trackit_everything.log',
             'formatter': 'verbose'
         },
         'file_activity': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': 'logs/trackit_activity.log',
+            'filename': '/var/log/code/trackit_activity.log',
             'formatter': 'activity'
         },
     },

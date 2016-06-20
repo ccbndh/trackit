@@ -7,9 +7,9 @@ RUN apt-get install -y python-pip
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-RUN mkdir /code
-RUN mkdir -p /code/logs /var/log/celery /var/log/supervisor
+RUN mkdir -p /var/log/code/ /var/log/celery /var/log/supervisor
 
+RUN mkdir /code
 WORKDIR /code
 ADD requirements.txt /code/
 RUN pip install -r requirements.txt
