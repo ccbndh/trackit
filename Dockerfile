@@ -4,6 +4,7 @@ MAINTAINER ccbn
 RUN apt-get update --fix-missing && apt-get install -y supervisor
 RUN apt-get install -y software-properties-common git libyaml-dev libpq-dev libxml2-dev libffi-dev libxslt1-dev python-dev python-setuptools apt-transport-https
 RUN apt-get install -y python-pip
+RUN apt-get install -y netcat-traditional
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
