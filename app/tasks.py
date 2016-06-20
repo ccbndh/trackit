@@ -8,7 +8,7 @@ from celery.signals import task_success
 from spider.ghn_spider import GHNSpider
 from spider.vnpost_spider import VnpostSpider
 
-from app.models import Parcel, Carrier, Event
+from app.models import Carrier, Event
 
 # Get an instance of the logger
 logger = logging.getLogger("api.activity")
@@ -29,4 +29,3 @@ def task_success_handler(result, *args, **kwargs):
     logger.debug("{} {}".format('task_success', result))
 
     raw_parcel = result.get('parcel')
-    Parcel.objects.create(parcel_id=raw_parcel.get('id'))

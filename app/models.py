@@ -2,7 +2,6 @@ from __future__ import unicode_literals
 
 from django.contrib.postgres.fields import JSONField, ArrayField
 from django.db import models
-from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 
 
@@ -24,29 +23,8 @@ class Carrier(models.Model):
 
 
 @python_2_unicode_compatible  # only if you need to support Python 2
-class Parcel(models.Model):
-    parcel_id = models.CharField(max_length=500, null=True)
-    picked_up_date = models.DateTimeField(null=True, blank=True)
-    delivered_date = models.DateTimeField(null=True, blank=True)
-    imported_date = models.DateTimeField(default=timezone.now)
-    updated_date = models.DateTimeField(default=timezone.now)
-
-    origin_country = models.CharField(max_length=500, null=True, blank=True)
-    origin_locality = models.CharField(max_length=500, null=True, blank=True)
-    origin_raw_location = models.CharField(max_length=500, null=True, blank=True)
-
-    destination_country = models.CharField(max_length=500, null=True, blank=True)
-    destination_locality = models.CharField(max_length=500, null=True, blank=True)
-    destination_raw_location = models.CharField(max_length=500, null=True, blank=True)
-
-    def __str__(self):
-        return unicode(self.parcel_id)
-
-
-@python_2_unicode_compatible  # only if you need to support Python 2
 class Event(models.Model):
     carrier = models.ManyToManyField(Carrier)
-    parcel = models.ForeignKey(Parcel)
 
     original_event_type = models.CharField(max_length=500, null=True)
     original_time = models.CharField(max_length=500, null=True)
