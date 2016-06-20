@@ -171,12 +171,6 @@ LOGGING = {
             'filename': 'logs/trackit_activity.log',
             'formatter': 'activity'
         },
-        'file_access': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': 'logs/trackit_elk.log',
-            'formatter': 'access'
-        },
     },
     'loggers': {
         'django': {
@@ -187,10 +181,5 @@ LOGGING = {
             'handlers': ['file_activity'],
             'level': 'DEBUG',
         },
-        'api.access': {
-            'handlers': ['file_access'],
-            'level': 'DEBUG',
-        },
-
     },
 }
