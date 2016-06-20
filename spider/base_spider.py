@@ -1,7 +1,8 @@
 from __future__ import unicode_literals
-import urllib
-import urllib2
+
 import cookielib
+import urllib2
+
 import lxml.html
 
 TRACKING_URL = ''
@@ -11,14 +12,13 @@ class BaseSpider:
     def __init__(self, parcel_id):
         self.parcel_id = parcel_id
         self.base_raw_data = {
-            'info_parcel': {'id': '', 'status': '', 'weight': '', 'size': '', 'price': '', 'deliver_time': '',
-                            'note': ''},
-            'info_from': {'address': '', 'name': '', 'tel': '', 'note': ''},
-            'info_to': {'address': '', 'name': '', 'tel': '', 'note': ''},
-            'detail_events': []}
+            'parcel': {'id': '', 'status': '', 'weight': '', 'size': '', 'price': '', 'deliver_time': '',
+                       'note': ''},
+            'origin_location': {'address': '', 'name': '', 'tel': '', 'note': ''},
+            'destination_location': {'address': '', 'name': '', 'tel': '', 'note': ''},
+            'events_details': []}
 
     tracking_url = TRACKING_URL
-
 
     def get_opener_cookie(self):
         cj = cookielib.CookieJar()
