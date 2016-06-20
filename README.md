@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.com/ccbndh/trackit.svg?token=A6u9nWoL1AULJQHGeii4&branch=master)](https://travis-ci.com/ccbndh/trackit)   
+
+
+
 # Tracking parcel
 # Tech stack: Django, celery (async result), rabbitmq
 

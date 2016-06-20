@@ -16,5 +16,5 @@ script:
   - docker-compose -v
   - docker-compose build
   - docker-compose up -d
-  - sleep 5
+  - sleep 3
   - docker exec trackit_web_1 python manage.py test
