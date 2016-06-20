@@ -22,4 +22,6 @@ pids
 
 /static/
 
+/logs/
+
 get_update_parcel_inline.html

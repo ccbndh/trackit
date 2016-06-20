@@ -135,3 +135,62 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+        'access': {
+            'format': "[%(asctime)s] %(message)s",
+            'datefmt': "%Y-%m-%dT%H:%M:%S%z",
+        },
+        'activity': {
+            'format': "[%(asctime)s] %(message)s",
+            'datefmt': "%Y-%m-%dT%H:%M:%S%z",
+        },
+
+    },
+    'handlers': {
+        'file_system': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'logs/trackit_everything.log',
+            'formatter': 'verbose'
+        },
+        'file_activity': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'logs/trackit_activity.log',
+            'formatter': 'activity'
+        },
+        'file_access': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'logs/trackit_elk.log',
+            'formatter': 'access'
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file_system'],
+            'propagate': True,
+        },
+        'api.activity': {
+            'handlers': ['file_activity'],
+            'level': 'DEBUG',
+        },
+        'api.access': {
+            'handlers': ['file_access'],
+            'level': 'DEBUG',
+        },
+
+    },
+}

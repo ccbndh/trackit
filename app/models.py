@@ -1,7 +1,8 @@
 from __future__ import unicode_literals
-from django.utils import timezone
+
 from django.contrib.postgres.fields import JSONField, ArrayField
 from django.db import models
+from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 
 
