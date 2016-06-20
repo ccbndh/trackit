@@ -29,4 +29,4 @@ def task_success_handler(result, *args, **kwargs):
     logger.debug("{} {}".format('task_success', result))
 
     raw_parcel = result.get('parcel')
-    Parcel.objects.create(parcel_id=raw_parcel.get('parcel_id'))
+    Parcel.objects.create(parcel_id=raw_parcel.get('id'))
