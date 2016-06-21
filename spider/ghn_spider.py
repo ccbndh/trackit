@@ -39,10 +39,10 @@ class GHNSpider(BaseSpider):
         # parse html to get info from, to
         try:
             tracking_table_elm = tree.find_class('tracking-table')[1].getchildren()
-            self.base_raw_data['destination_location']['name'] = tracking_table_elm[0].text_content().strip()
-            self.base_raw_data['destination_location']['address'] = tracking_table_elm[1].text_content().strip()
-            self.base_raw_data['destination_location']['tel'] = tracking_table_elm[2].text_content().strip()
-            self.base_raw_data['destination_location']['note'] = tracking_table_elm[3].text_content().strip()
+            self.base_raw_data['destination']['name'] = tracking_table_elm[0].text_content().strip()
+            self.base_raw_data['destination']['address'] = tracking_table_elm[1].text_content().strip()
+            self.base_raw_data['destination']['tel'] = tracking_table_elm[2].text_content().strip()
+            self.base_raw_data['destination']['note'] = tracking_table_elm[3].text_content().strip()
         except Exception as error:
             pass
 

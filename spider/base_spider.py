@@ -14,9 +14,11 @@ class BaseSpider:
         self.base_raw_data = {
             'parcel': {'id': '', 'status': '', 'weight': '', 'size': '', 'price': '', 'deliver_time': '',
                        'note': ''},
-            'origin_location': {'address': '', 'name': '', 'tel': '', 'note': ''},
-            'destination_location': {'address': '', 'name': '', 'tel': '', 'note': ''},
-            'events_details': []}
+            'origin': {'address': '', 'country': '', 'city': '', 'name': '', 'tel': '', 'note': ''},
+            'destination': {'address': '', 'country': '', 'city': '', 'name': '', 'tel': '', 'note': ''},
+            'events_summary': [],
+            'events_details': []
+        }
 
     tracking_url = TRACKING_URL
 

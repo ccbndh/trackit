@@ -45,8 +45,8 @@ class VnpostSpider(BaseSpider):
             country_elm = tracking_info_elm[0]
             from_country = country_elm[1].text_content().strip()
             to_country = country_elm[3].text_content().strip()
-            self.base_raw_data['origin_location']['address'] = from_country
-            self.base_raw_data['destination_location']['address'] = to_country
+            self.base_raw_data['origin']['address'] = from_country
+            self.base_raw_data['destination']['address'] = to_country
         except Exception as error:
             pass
 
@@ -62,6 +62,21 @@ class VnpostSpider(BaseSpider):
                 event_localtion = list_event_elm[1].getchildren()[0].text_content().strip()
                 event_dict['event_localtion'] = event_localtion
                 self.base_raw_data['events_details'].append(event_dict)
+        except Exception as error:
+            pass
+
+        try:
+            list_summary_event = tree.find_class('table-done')[0].getchildren()
+            for e in list_summary_event[1:]:
+                event_dict = {}
+                list_event_elm = e.getchildren()
+                event_time = list_event_elm[0].text_content().strip()
+                event_dict['event_time'] = event_time
+                event_name = list_event_elm[2].text.strip()
+                event_dict['event_name'] = event_name
+                event_localtion = list_event_elm[1].getchildren()[0].text_content().strip()
+                event_dict['event_localtion'] = event_localtion
+                self.base_raw_data['events_summary'].append(event_dict)
         except Exception as error:
             pass
 
