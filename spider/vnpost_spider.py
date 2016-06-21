@@ -15,7 +15,7 @@ class VnpostSpider(BaseSpider):
 
     def parse_main(self):
         opener = self.get_opener_cookie()
-        html = opener.open(self.tracking_url).read()
+        html = opener.open(self.tracking_url, timeout=10).read()
         data = self.parse_form(html)
         data['key'] = str(self.parcel_id).upper().strip()
         encoded_data = urllib.urlencode(data)
