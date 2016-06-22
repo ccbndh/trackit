@@ -10,6 +10,9 @@ from spider.vnpost_spider import VnpostSpider
 
 from app.models import RawData
 
+from app.models import Parcel
+from app.serializers import EventSerializer, ParcelSerializer, CarrierSerializer
+
 # Get an instance of the logger
 logger = logging.getLogger("api.activity")
 
@@ -28,7 +31,14 @@ def task_success_handler(result, *args, **kwargs):
     logger.debug("{} {}".format('task_success', 'task_success'))
     logger.debug("{} {}".format('task_success', result))
 
-    parcel_id = result.get('parcel').get('id')
+    parcel_id = result.get('parcel').get('parcel_id')
+    parcel = result.get('parcel')
+
+    serializer = ParcelSerializer(data=parcel, partial=True)
+    serializer.is_valid()
+    serializer.errors
+    serializer.save()
+
     raw_data, _ = RawData.objects.get_or_create(parcel_id=parcel_id)
     raw_data.data = result
     raw_data.save()

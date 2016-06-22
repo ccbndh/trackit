@@ -31,7 +31,7 @@ class VnpostSpider(BaseSpider):
             parcel_id_elm = tree.find_class('col-sm-3 package-code')[0].getchildren()
             parcel_id = parcel_id_elm[2].text_content().strip()
             # overview['parcel_id'] = parcel_id
-            self.base_raw_data['parcel']['id'] = parcel_id
+            self.base_raw_data['parcel']['parcel_id'] = parcel_id
 
             parcel_weight_elm = tree.find_class('col-sm-4 package-weight')[0].getchildren()
             parcel_weight = parcel_weight_elm[2].text_content().strip()

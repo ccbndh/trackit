@@ -12,8 +12,8 @@ class BaseSpider:
     def __init__(self, parcel_id):
         self.parcel_id = parcel_id
         self.base_raw_data = {
-            'parcel': {'id': '', 'status': '', 'weight': '', 'size': '', 'price': '', 'deliver_time': '',
-                       'note': ''},
+            'parcel': {'parcel_id': None, 'status': None, 'weight': None, 'size': None, 'price': None, 'deliver_time': None,
+                       'note': None},
             'origin': {'address': '', 'country': '', 'city': '', 'name': '', 'tel': '', 'note': ''},
             'destination': {'address': '', 'country': '', 'city': '', 'name': '', 'tel': '', 'note': ''},
             'events_summary': [],

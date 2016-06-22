@@ -25,7 +25,7 @@ class GHNSpider(BaseSpider):
         try:
             tracking_table_elm = tree.find_class('tracking-table')[0].getchildren()
             parcel_id = self.parcel_id
-            self.base_raw_data['parcel']['id'] = parcel_id
+            self.base_raw_data['parcel']['parcel_id'] = parcel_id
             self.base_raw_data['parcel']['status'] = tree.find_class('fix-status active')[0].text_content().strip()
             self.base_raw_data['parcel']['weight'] = tracking_table_elm[1].getchildren()[1].text_content().strip()
             self.base_raw_data['parcel']['size'] = tracking_table_elm[2].getchildren()[1].text_content().strip()
