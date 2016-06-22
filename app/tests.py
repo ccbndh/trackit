@@ -15,3 +15,7 @@ class AddTestCase(TestCase):
         self.assertTrue(result.successful())
         parcel_id_res = result.result.get('parcel').get('parcel_id')
         self.assertEqual(parcel_id, parcel_id_res, "Should return true parcel_id")
+
+        result = task_get_data_from_spider.delay(parcel_id)
+        parcel_id_res = result.result.get('parcel').get('parcel_id')
+        self.assertEqual(parcel_id, parcel_id_res, "Should return true parcel_id 2 times")

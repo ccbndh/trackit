@@ -35,7 +35,7 @@ class Carrier(models.Model):
 
 @python_2_unicode_compatible  # only if you need to support Python 2
 class Parcel(models.Model):
-    parcel_id = models.CharField(max_length=200, null=True)
+    parcel_id = models.CharField(max_length=200, null=True, unique=True)
     status = models.CharField(max_length=100, null=True)
     weight = models.CharField(max_length=100, null=True)
     size = models.CharField(max_length=100, null=True)
