@@ -1,0 +1,34 @@
+[
+  {
+    "model": "app.Carrier",
+    "pk": 0,
+    "fields": {
+      "name": "Vietnam Post",
+      "slug_name": "vnpost",
+      "carrier_id": "vnpost",
+      "carrier_language": "vi",
+      "carrier_cs_phone": "+84 1900 54 54 81",
+      "carrier_url": "http://www.vnpost.vn/",
+      "carrier_url_tracking": "http://www.vnpost.vn/",
+      "carrier_support_languages": "[\"en\",\"vi\"]",
+      "carrier_countries_iso": "[\"VN\"]",
+      "comments": "Complete"
+    }
+  },
+  {
+    "model": "app.Carrier",
+    "pk": 1,
+    "fields": {
+      "name": "Giao hàng nhanh",
+      "slug_name": "ghn",
+      "carrier_id": "ghn",
+      "carrier_language": "vi",
+      "carrier_cs_phone": "+84 19006491",
+      "carrier_url": "http://giaohangnhanh.vn/",
+      "carrier_url_tracking": "http://giaohangnhanh.vn/",
+      "carrier_support_languages": "[\"vi\"]",
+      "carrier_countries_iso": "[\"VN\"]",
+      "comments": "Complete"
+    }
+  }
+]

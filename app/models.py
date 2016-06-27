@@ -24,8 +24,8 @@ class Carrier(models.Model):
     carrier_url = models.CharField(max_length=200, null=True, blank=True)
     carrier_url_tracking = models.CharField(max_length=200, null=True, blank=True)
     carrier_support_languages = ArrayField(models.CharField(max_length=50), null=True, blank=True)
-    carrier_logo = models.CharField(max_length=100, null=True, blank=True)
     comments = models.CharField(max_length=200, null=True, blank=True)
+    carrier_countries_iso = ArrayField(models.CharField(max_length=200), null=True, blank=True)
 
     pattern_regex = ArrayField(models.CharField(max_length=1000), null=True, blank=True)
 

@@ -38,7 +38,3 @@ def task_success_handler(result, *args, **kwargs):
     serializer.is_valid()
     if serializer.validated_data:
         serializer.save()
-
-    raw_data, _ = RawData.objects.get_or_create(parcel_id=parcel_id)
-    raw_data.data = result
-    raw_data.save()
