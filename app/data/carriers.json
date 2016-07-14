@@ -12,7 +12,8 @@
       "carrier_url_tracking": "http://www.vnpost.vn/",
       "carrier_support_languages": "[\"en\",\"vi\"]",
       "carrier_countries_iso": "[\"VN\"]",
-      "comments": "Complete"
+      "comments": "Complete",
+      "pattern_regex": "[\"[A[A-Z]{1}[0-9]{9}VN\",\"C[A-Z]{1}[0-9]{9}VN\",\"E[A-Z]{1}[0-9]{9}VN\",\"L[A-Z]{1}[0-9]{9}VN\",\"N[A-Z]{1}[0-9]{9}VN\",\"S[A-Z]{1}[0-9]{9}VN\",\"V[A-Z]{1}[0-9]{9}VN]\"]"
     }
   },
   {
