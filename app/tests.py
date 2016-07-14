@@ -1,7 +1,21 @@
 from django.test import TestCase
 from django.test.utils import override_settings
 
+from app.models import Carrier
 from app.tasks import task_get_data_from_spider
+
+
+class PattentMatchingCarrierTestCase(TestCase):
+    fixtures = ['app/data/carriers.json']
+
+    def test_pattent_matching_vnpost(self):
+        parcel_id = 'EL745355158VN'
+        vnpost_carrier = Carrier.detect_carrier_by_parcel_id(parcel_id)
+        self.assertEqual(vnpost_carrier.slug_name, 'vnpost', "Should return vnpost slug name")
+
+        parcel_id = 'AAAAAAAAAAAAAAAAAA'
+        none_carrier = Carrier.detect_carrier_by_parcel_id(parcel_id)
+        self.assertEqual(none_carrier, None, "Should not return slug name")
 
 
 class AddTestCase(TestCase):
