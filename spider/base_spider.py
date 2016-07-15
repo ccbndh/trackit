@@ -9,8 +9,9 @@ TRACKING_URL = ''
 
 
 class BaseSpider:
-    def __init__(self, parcel_id):
+    def __init__(self, parcel_id, carrier_slug_name):
         self.parcel_id = parcel_id
+        self.carrier_slug_name = carrier_slug_name
         self.base_raw_data = {
             'parcel': {'parcel_id': None, 'status': None, 'weight': None, 'size': None, 'price': None, 'deliver_time': None,
                        'note': None},
