@@ -33,3 +33,11 @@ def task_success_handler(result, *args, **kwargs):
     serializer.is_valid()
     if serializer.validated_data:
         serializer.save()
+
+    raw_event_list = result.get('events_details')
+    for raw_event in raw_event_list:
+        raw_event['parcel'] = 1
+        serializer = EventSerializer(data=raw_event, partial=True)
+        serializer.is_valid()
+        if serializer.validated_data:
+            serializer.save()

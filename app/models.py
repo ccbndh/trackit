@@ -52,9 +52,9 @@ class Parcel(models.Model):
 class Event(models.Model):
     parcel = models.ForeignKey(Parcel)
     carrier = models.ForeignKey(Carrier, null=True)
-    original_event_type = models.CharField(max_length=500, null=True, blank=True)
-    original_time = models.CharField(max_length=500, null=True, blank=True)
-    original_location = models.CharField(max_length=500, null=True, blank=True)
+    event_name = models.CharField(max_length=500, null=True, blank=True)
+    event_time = models.CharField(max_length=500, null=True, blank=True)
+    event_localtion = models.CharField(max_length=500, null=True, blank=True)
     additional_params = JSONField(null=True, blank=True)
     parsed_event_time = models.DateTimeField(null=True)
 
