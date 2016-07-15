@@ -29,15 +29,15 @@ def task_get_data_from_spider(parcel_id):
 def task_success_handler(result, *args, **kwargs):
     logger.debug("{} {}".format('task_success', result))
     parcel = result.get('parcel')
-    serializer = ParcelSerializer(data=parcel, partial=True)
-    serializer.is_valid()
-    if serializer.validated_data:
-        serializer.save()
+    parcel_serializer = ParcelSerializer(data=parcel, partial=True)
+    parcel_serializer.is_valid()
+    if parcel_serializer.validated_data:
+        parcel_obj = parcel_serializer.save()
 
-    raw_event_list = result.get('events_details')
-    for raw_event in raw_event_list:
-        raw_event['parcel'] = 1
-        serializer = EventSerializer(data=raw_event, partial=True)
-        serializer.is_valid()
-        if serializer.validated_data:
-            serializer.save()
+        raw_event_list = result.get('events_details')
+        for raw_event in raw_event_list:
+            raw_event['parcel'] = parcel_obj.id
+            serializer = EventSerializer(data=raw_event, partial=True)
+            serializer.is_valid()
+            if serializer.validated_data:
+                serializer.save()
