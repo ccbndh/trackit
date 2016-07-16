@@ -23,6 +23,8 @@ class GHNSpider(BaseSpider):
 
         # parse html to get parcel info
         try:
+            self.base_raw_data['carrier']['slug_name'] = 'ghn'
+
             tracking_table_elm = tree.find_class('tracking-table')[0].getchildren()
             parcel_id = self.parcel_id
             self.base_raw_data['parcel']['parcel_id'] = parcel_id
@@ -57,9 +59,9 @@ class GHNSpider(BaseSpider):
                     for e in detail_list:
                         event_dict = {}
                         temp = e.getchildren()
-                        event_dict['name'] = temp[1].text_content()
-                        event_dict['time'] = temp[2].getchildren()[1].text_content()
-                        event_dict['localtion'] = location
+                        event_dict['event_name'] = temp[1].text_content()
+                        event_dict['event_time'] = temp[2].getchildren()[1].text_content()
+                        event_dict['event_localtion'] = location
                         self.base_raw_data['events_details'].append(event_dict)
         except Exception as error:
             pass
