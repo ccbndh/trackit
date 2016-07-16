@@ -13,6 +13,7 @@ class BaseSpider:
         self.parcel_id = parcel_id
         self.carrier_slug_name = carrier_slug_name
         self.base_raw_data = {
+            'carrier': {'id': None, 'slug_name': None},
             'parcel': {'parcel_id': None, 'status': None, 'weight': None, 'size': None, 'price': None, 'deliver_time': None,
                        'note': None},
             'origin': {'address': '', 'country': '', 'city': '', 'name': '', 'tel': '', 'note': ''},

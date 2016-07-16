@@ -33,10 +33,12 @@ def task_success_handler(result, *args, **kwargs):
     parcel_serializer.is_valid()
     if parcel_serializer.validated_data:
         parcel_obj = parcel_serializer.save()
+        carrier_obj = Carrier.objects.get(slug_name=result.get('carrier').get('slug_name'))
 
         raw_event_list = result.get('events_details')
         for raw_event in raw_event_list:
             raw_event['parcel'] = parcel_obj.id
+            raw_event['carrier'] = carrier_obj.id
             serializer = EventSerializer(data=raw_event, partial=True)
             serializer.is_valid()
             if serializer.validated_data:

@@ -1,7 +1,7 @@
 [
   {
     "model": "app.Carrier",
-    "pk": 0,
+    "pk": 1,
     "fields": {
       "name": "Vietnam Post",
       "slug_name": "vnpost",
@@ -18,7 +18,7 @@
   },
   {
     "model": "app.Carrier",
-    "pk": 1,
+    "pk": 2,
     "fields": {
       "name": "Giao hàng nhanh",
       "slug_name": "ghn",

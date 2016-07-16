@@ -26,8 +26,9 @@ class VnpostSpider(BaseSpider):
     def normalize(self):
 
         tree = lxml.html.fromstring(self.parse_main())
-        # overview = {}
         try:
+            self.base_raw_data['carrier']['slug_name'] = 'vnpost'
+
             parcel_id_elm = tree.find_class('col-sm-3 package-code')[0].getchildren()
             parcel_id = parcel_id_elm[2].text_content().strip()
             # overview['parcel_id'] = parcel_id
