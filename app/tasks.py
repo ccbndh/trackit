@@ -27,19 +27,22 @@ def task_get_data_from_spider(parcel_id):
 
 @task_success.connect
 def task_success_handler(result, *args, **kwargs):
-    logger.debug("{} {}".format('task_success', result))
     parcel = result.get('parcel')
     parcel_serializer = ParcelSerializer(data=parcel, partial=True)
     parcel_serializer.is_valid()
     if parcel_serializer.validated_data:
-        parcel_obj = parcel_serializer.save()
-        carrier_obj = Carrier.objects.get(slug_name=result.get('carrier').get('slug_name'))
+        try:
+            parcel_obj = parcel_serializer.save()
+            carrier_obj = Carrier.objects.get(slug_name=result.get('carrier').get('slug_name'))
 
-        raw_event_list = result.get('events_details')
-        for raw_event in raw_event_list:
-            raw_event['parcel'] = parcel_obj.id
-            raw_event['carrier'] = carrier_obj.id
-            serializer = EventSerializer(data=raw_event, partial=True)
-            serializer.is_valid()
-            if serializer.validated_data:
-                serializer.save()
+            raw_event_list = result.get('events_details')
+            for raw_event in raw_event_list:
+                raw_event['parcel'] = parcel_obj.id
+                raw_event['carrier'] = carrier_obj.id
+                logger.debug("{} {}".format('raw_event', raw_event))
+                serializer = EventSerializer(data=raw_event, partial=True)
+                serializer.is_valid()
+                if serializer.validated_data:
+                    serializer.save()
+        except Exception as error:
+            logger.debug("{} {}".format('task_success_handler', error))
