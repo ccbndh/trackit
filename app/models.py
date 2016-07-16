@@ -24,16 +24,17 @@ class Carrier(models.Model):
     def __str__(self):
         return unicode(self.name)
 
-    @staticmethod
-    def detect_carrier_by_parcel_id(parcel_id):
-        carriers = Carrier.objects.all()
-        for carrier in carriers:
-            if carrier and carrier.pattern_regex:
-                for pattern_rg in carrier.pattern_regex:
-                    pattern = re.compile(pattern_rg)
-                    if pattern.match(parcel_id):
-                        return carrier
-        return None
+
+def carrier_identify(parcel_id):
+    carriers = Carrier.objects.all()
+    for carrier in carriers:
+        if carrier and carrier.pattern_regex:
+            for pattern_rg in carrier.pattern_regex:
+                pattern = re.compile(pattern_rg)
+                if pattern.match(parcel_id):
+                    return carrier
+    return None
+
 
 @python_2_unicode_compatible  # only if you need to support Python 2
 class Parcel(models.Model):

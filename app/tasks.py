@@ -4,7 +4,7 @@ import logging
 
 from celery import task
 from celery.signals import task_success
-
+from app.models import carrier_identify
 from spider.ghn_spider import GHNSpider
 from spider.vnpost_spider import VnpostSpider
 from app.commons.defined import CARRIER_SPIDER
@@ -17,7 +17,7 @@ logger = logging.getLogger("api.activity")
 
 @task()
 def task_get_data_from_spider(parcel_id):
-    carrier = Carrier.detect_carrier_by_parcel_id(parcel_id)
+    carrier = carrier_identify(parcel_id)
     if carrier:
         spider = eval(CARRIER_SPIDER[carrier.slug_name])(parcel_id, carrier.slug_name)
     else:
