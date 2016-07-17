@@ -1,7 +1,11 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var Router = require('react-router').Router
+var Route = require('react-router').Route
+var Link = require('react-router').Link
+var browserHistory = require('react-router').browserHistory
 
-var Hello = React.createClass({
+var Home = React.createClass({
 	render: function() {
 		return (
 			<h1>
@@ -11,16 +15,16 @@ var Hello = React.createClass({
 	}
 });
 
-var CommentForm = React.createClass({
+var Tracking = React.createClass({
   render: function() {
-    return (
-      <form className="commentForm">
-        <input type="text" placeholder="Enter parcel id" />
-        <input type="submit" value="Track" />
-      </form>
-    );
+     return (<h1>Tracking result: {this.props.params.parcelId}</h1>);
   }
 });
 
-ReactDOM.render(<Hello />, document.getElementById('container-welcome'))
-ReactDOM.render(<CommentForm />, document.getElementById('container-form'))
+ReactDOM.render((
+  <Router history={browserHistory}>
+      <Route path="/" component={Home} />
+      <Route path="/:parcelId" component={Tracking} />
+  </Router>
+
+), document.getElementById('container'));
