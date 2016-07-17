@@ -19,9 +19,11 @@ pids
 
 # Logs
 *.log
-
-/static/
-
 /logs/
 
-get_update_parcel_inline.html
+# webpack
+webpack-stats.json
+static/
+assets/bundles/
+node_modules/
+
