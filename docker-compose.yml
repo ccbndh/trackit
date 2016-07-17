@@ -7,8 +7,8 @@ services:
     ports:
       - "54322:5432"
   web:
-    # build: .
-    image: ccbndh/trackit
+    build: .
+    # image: ccbndh/trackit
     environment:
       C_FORCE_ROOT: "yes"
     volumes:
