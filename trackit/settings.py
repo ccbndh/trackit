@@ -47,11 +47,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'webpack_loader',
     'app',
     'djcelery',
     'rest_framework',
     'rest_framework_swagger',
-    'webpack_loader',
 ]
 
 
@@ -83,7 +83,7 @@ ROOT_URLCONF = 'trackit.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
