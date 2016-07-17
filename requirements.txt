@@ -9,3 +9,4 @@ regex==2016.1.10
 redis==2.10.5
 Scrapy==1.1.0
 lxml==3.6.0
+django-webpack-loader==0.3.0
