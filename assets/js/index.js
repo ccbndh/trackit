@@ -5,10 +5,22 @@ var Hello = React.createClass({
 	render: function() {
 		return (
 			<h1>
-			Hello, React!
+			Tracking your parcel!
 			</h1>
 		)
 	}
 });
 
-ReactDOM.render(<Hello />, document.getElementById('container'))
+var CommentForm = React.createClass({
+  render: function() {
+    return (
+      <form className="commentForm">
+        <input type="text" placeholder="Enter parcel id" />
+        <input type="submit" value="Track" />
+      </form>
+    );
+  }
+});
+
+ReactDOM.render(<Hello />, document.getElementById('container-welcome'))
+ReactDOM.render(<CommentForm />, document.getElementById('container-form'))
