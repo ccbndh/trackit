@@ -20,7 +20,7 @@ var InputForm = React.createClass({
         return {parcelId: ''};
     },
     handleParcelIdChange: function (e) {
-        this.setState({parcelId: e.target.value});
+        this.setState({parcelId: e.target.value.trim().toUpperCase()});
     },
     handleSubmit: function (e) {
         e.preventDefault();
