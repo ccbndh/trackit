@@ -40,7 +40,12 @@ var InputForm = React.createClass({
                         url: "http://127.0.0.1:8000/api/v1/task/?task_id=" + resTask.task_id,
                         type: "GET",
                         success: function (resData) {
-                            console.log(resData)
+                            console.log(resData);
+                            ReactDOM.render(
+                                <EventList events={resData}/>,
+                                document.getElementById('container-data')
+                            );
+
                         }, dataType: "json", error: poll, timeout: 30000
                     });
                 })();
@@ -78,17 +83,27 @@ var Home = React.createClass({
     }
 });
 
-
-var Tracking = React.createClass({
+var EventList = React.createClass({
     render: function () {
-        return (<h1>Tracking result: {this.props.params.parcelId}</h1>);
+        var events = this.props.events.events_details;
+        return (
+            <div className="note-list">
+                {
+                    events.map(function (event) {
+                        return (
+                            <div
+                                className="note-summary">{event.event_name} {event.event_localtion} {event.event_time}</div>
+                        );
+                    })
+                }
+            </div>
+        );
     }
 });
 
 ReactDOM.render((
     <Router history={browserHistory}>
         <Route path="/" component={Home}/>
-        <Route path="/:parcelId" component={Tracking}/>
     </Router>
 
 ), document.getElementById('container'));
