@@ -52,14 +52,15 @@ var InputForm = React.createClass({
     },
     render: function () {
         return (
-            <form className="input-group" onSubmit={this.handleSubmit}>
+            <form className="form-inline" onSubmit={this.handleSubmit}>
                 <input
+                    className="form-control"
                     type="text"
                     placeholder="Enter your parcel id"
                     value={this.state.parcelId}
                     onChange={this.handleParcelIdChange}
                 />
-                <input type="submit" value="Track"/>
+                <input className="btn btn-primary" type="submit" value="Track"/>
             </form>
         );
     }
