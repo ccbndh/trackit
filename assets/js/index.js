@@ -4,6 +4,7 @@ var Router = require('react-router').Router
 var Route = require('react-router').Route
 var Link = require('react-router').Link
 var browserHistory = require('react-router').browserHistory
+var Config = require('Config')
 
 var Welcome = React.createClass({
     render: function () {
@@ -30,14 +31,14 @@ var InputForm = React.createClass({
         }
 
         $.ajax({
-            url: "http://127.0.0.1:8000/api/v1/task/",
+            url: Config.serverUrl + "/api/v1/task/",
             dataType: 'json',
             type: 'POST',
             data: {"parcel_id": parcelId},
             success: function (resTask) {
                 (function poll() {
                     $.ajax({
-                        url: "http://127.0.0.1:8000/api/v1/task/?task_id=" + resTask.task_id,
+                        url: Config.serverUrl + "/api/v1/task/?task_id=" + resTask.task_id,
                         type: "GET",
                         success: function (resData) {
                             console.log(resData);
