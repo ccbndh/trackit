@@ -21,3 +21,11 @@ class ParcelSerializer(serializers.ModelSerializer):
 class CarrierSerializer(serializers.ModelSerializer):
     class Meta:
         model = Carrier
+
+
+class EventNestedSerializer(serializers.ModelSerializer):
+    parcel = ParcelSerializer()
+    carrier = CarrierSerializer()
+
+    class Meta:
+        model = Event

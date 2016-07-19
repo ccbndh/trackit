@@ -60,4 +60,4 @@ class Event(models.Model):
     parsed_event_time = models.DateTimeField(null=True)
 
     def __str__(self):
-        return unicode(self.original_event_type)
+        return unicode(self.event_name)

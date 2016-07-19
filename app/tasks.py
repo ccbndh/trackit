@@ -8,8 +8,8 @@ from app.models import carrier_identify
 from spider.ghn_spider import GHNSpider
 from spider.vnpost_spider import VnpostSpider
 from app.commons.defined import CARRIER_SPIDER
-from app.models import Carrier
-from app.serializers import EventSerializer, ParcelSerializer, CarrierSerializer
+from app.models import Carrier, Parcel, Event
+from app.serializers import EventSerializer, ParcelSerializer, EventNestedSerializer
 
 # Get an instance of the logger
 logger = logging.getLogger("api.activity")
@@ -22,27 +22,26 @@ def task_get_data_from_spider(parcel_id):
         spider = eval(CARRIER_SPIDER[carrier.slug_name])(parcel_id, carrier.slug_name)
     else:
         spider = eval('GHNSpider')(parcel_id, 'ghn')
-    return spider.normalize()
+    result = spider.normalize()
 
-
-@task_success.connect
-def task_success_handler(result, *args, **kwargs):
+    # create or update parcel by parcel_id
     parcel = result.get('parcel')
-    parcel_serializer = ParcelSerializer(data=parcel, partial=True)
-    parcel_serializer.is_valid()
-    if parcel_serializer.validated_data:
-        try:
-            parcel_obj = parcel_serializer.save()
-            carrier_obj = Carrier.objects.get(slug_name=result.get('carrier').get('slug_name'))
+    parcel_serializer = ParcelSerializer(data=parcel, partial=True)  # normalize data from spider
+    if parcel_serializer.is_valid():
+        Parcel.objects.update_or_create(parcel_id=parcel.get('parcel_id'), defaults=parcel_serializer.data)
+    parcel_obj, _ = Parcel.objects.update_or_create(parcel)
 
-            raw_event_list = result.get('events_details')
-            for raw_event in raw_event_list:
-                raw_event['parcel'] = parcel_obj.id
-                raw_event['carrier'] = carrier_obj.id
-                logger.debug("{} {}".format('raw_event', raw_event))
-                serializer = EventSerializer(data=raw_event, partial=True)
-                serializer.is_valid()
-                if serializer.validated_data:
-                    serializer.save()
-        except Exception as error:
-            logger.debug("{} {}".format('task_success_handler', error))
+    # get carrier
+    carrier = result.get('carrier')
+    carrier_obj = Carrier.objects.get(slug_name=carrier.get('slug_name'))
+
+    # get or update event
+    events = result.get('events_details')
+    event_obj_list = []
+    for event in events:
+        # can't use here because .data always valid and missing parcel
+        # event_serializer = EventSerializer(data=event, partial=True)
+        event_obj, _ = Event.objects.get_or_create(parcel=parcel_obj, carrier=carrier_obj, **event)
+        event_obj_list.append(event_obj)
+    events_serializer = EventNestedSerializer(event_obj_list, many=True)
+    return events_serializer.data
