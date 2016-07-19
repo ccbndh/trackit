@@ -1,3 +1,4 @@
+import time
 from django.test import TestCase
 from django.test.utils import override_settings
 
@@ -13,6 +14,9 @@ from app.serializers import ParcelSerializer, CarrierSerializer, EventNestedSeri
 
 class AddTestCase(TestCase):
     fixtures = ['app/data/carriers.json']
+
+    def tearDown(self):
+        time.sleep(3)  # sleep time in seconds
 
     @override_settings(
         CELERY_EAGER_PROPAGATES_EXCEPTIONS=True,
