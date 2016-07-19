@@ -61,7 +61,7 @@ class GHNSpider(BaseSpider):
                         temp = e.getchildren()
                         event_dict['event_name'] = temp[1].text_content()
                         event_dict['event_time'] = temp[2].getchildren()[1].text_content()
-                        event_dict['event_localtion'] = location
+                        event_dict['event_location'] = location
                         self.base_raw_data['events_details'].append(event_dict)
         except Exception as error:
             pass

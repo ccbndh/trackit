@@ -84,6 +84,16 @@ var Home = React.createClass({
 });
 
 
+var EventItem = React.createClass({
+    render: function () {
+        return (
+            <div className={this.props.pClassName}>
+                {this.props.value}
+            </div>
+        )
+    }
+});
+
 var EventList = React.createClass({
     render: function () {
         var events = this.props.events;
@@ -92,8 +102,11 @@ var EventList = React.createClass({
                 {
                     events.map(function (event, i) {
                         return (
-                            <div key={i}
-                                className="event-detail">{event.event_name} {event.event_localtion} {event.event_time}</div>
+                            <div key={i} className="event-detail">
+                                <EventItem value={event.event_name} pClassName="event-name"/>
+                                <EventItem value={event.event_time} pClassName="event-time"/>
+                                <EventItem value={event.event_location} pClassName="event-location"/>
+                            </div>
                         );
                     })
                 }

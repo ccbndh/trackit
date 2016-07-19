@@ -55,7 +55,7 @@ class Event(models.Model):
     carrier = models.ForeignKey(Carrier, null=True)
     event_name = models.CharField(max_length=500, null=True, blank=True)
     event_time = models.CharField(max_length=500, null=True, blank=True)
-    event_localtion = models.CharField(max_length=500, null=True, blank=True)
+    event_location = models.CharField(max_length=500, null=True, blank=True)
     additional_params = JSONField(null=True, blank=True)
     parsed_event_time = models.DateTimeField(null=True)
 

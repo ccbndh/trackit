@@ -60,8 +60,8 @@ class VnpostSpider(BaseSpider):
                 event_dict['event_time'] = event_time
                 event_name = list_event_elm[1].text.strip()
                 event_dict['event_name'] = event_name
-                event_localtion = list_event_elm[1].getchildren()[0].text_content().strip()
-                event_dict['event_localtion'] = event_localtion
+                event_location = list_event_elm[1].getchildren()[0].text_content().strip()
+                event_dict['event_location'] = event_location
                 self.base_raw_data['events_details'].append(event_dict)
         except Exception as error:
             pass
@@ -75,8 +75,8 @@ class VnpostSpider(BaseSpider):
                 event_dict['event_time'] = event_time
                 event_name = list_event_elm[2].text.strip()
                 event_dict['event_name'] = event_name
-                event_localtion = list_event_elm[1].getchildren()[0].text_content().strip()
-                event_dict['event_localtion'] = event_localtion
+                event_location = list_event_elm[1].getchildren()[0].text_content().strip()
+                event_dict['event_location'] = event_location
                 self.base_raw_data['events_summary'].append(event_dict)
         except Exception as error:
             pass
