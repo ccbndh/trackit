@@ -35,26 +35,15 @@ var InputForm = React.createClass({
             dataType: 'json',
             type: 'POST',
             data: {"parcel_id": parcelId},
-            success: function (resTask) {
+            success: function (task) {
                 (function poll() {
                     $.ajax({
-                        url: Config.serverUrl + "/api/v1/task/?task_id=" + resTask.task_id,
+                        url: Config.serverUrl + "/api/v1/task/?task_id=" + task.task_id,
                         type: "GET",
-                        success: function (resData) {
-                            console.log(resData);
-
+                        success: function (events) {
+                            console.log(events);
                             ReactDOM.render(
-                                <Parcel parcel={resData.parcel}/>,
-                                document.getElementById('container-parcel')
-                            );
-
-                            ReactDOM.render(
-                                <Carrier carrier={resData.carrier}/>,
-                                document.getElementById('container-carrier')
-                            );
-
-                            ReactDOM.render(
-                                <EventList events={resData.events_details}/>,
+                                <EventList events={events}/>,
                                 document.getElementById('container-events')
                             );
                         }, dataType: "json", error: poll, timeout: 30000
@@ -95,40 +84,16 @@ var Home = React.createClass({
 });
 
 
-
-var Parcel = React.createClass({
-    render: function () {
-        var parcel = this.props.parcel;
-        return (
-            <div className="parcel">
-               {parcel.parcel_id} {parcel.status} {parcel.size} {parcel.weight}
-            </div>
-        );
-    }
-});
-
-
-var Carrier = React.createClass({
-    render: function () {
-        var carrier = this.props.carrier;
-        return (
-            <div className="carrier">
-               {carrier.slug_name}
-            </div>
-        );
-    }
-});
-
 var EventList = React.createClass({
     render: function () {
         var events = this.props.events;
         return (
             <div className="events">
                 {
-                    events.map(function (event) {
+                    events.map(function (event, i) {
                         return (
-                            <div
-                                className="event-info">{event.event_name} {event.event_localtion} {event.event_time}</div>
+                            <div key={i}
+                                className="event-detail">{event.event_name} {event.event_localtion} {event.event_time}</div>
                         );
                     })
                 }
