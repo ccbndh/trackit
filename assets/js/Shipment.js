@@ -2,6 +2,24 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var Config = require('Config');
 
+var ShipmentNotFound = React.createClass({
+    render: function () {
+        return (
+            <div className="page-content-wrapper text-09">
+                <div className="container-fluid">
+                    <div className="row title-row">
+                        <div className="col-xs-12">
+                            <div className="pull-sm-left store-home"><a href=""
+                                                                        className="store-home--text"></a>
+                                We can track your parcel
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+});
 
 var EventListDetail = React.createClass({
     render: function () {
@@ -82,11 +100,17 @@ var Shipment = React.createClass({
                         url: Config.serverUrl + "/api/v1/task/?task_id=" + task.task_id,
                         type: "GET",
                         success: function (events) {
-                            console.log(events);
-                            ReactDOM.render(
-                                <ShipmentDetail events={events}/>,
-                                document.getElementById('shipment')
-                            );
+                            if(events.length > 0) {
+                                ReactDOM.render(
+                                    <ShipmentDetail events={events}/>,
+                                    document.getElementById('shipment')
+                                );
+                            }else{
+                                ReactDOM.render(
+                                    <ShipmentNotFound events={events}/>,
+                                    document.getElementById('shipment')
+                                );
+                            }
                         }, dataType: "json", error: poll, timeout: 30000
                     });
                 })();
