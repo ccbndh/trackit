@@ -54,6 +54,7 @@ var ShipmentDetail = React.createClass({
         var parcel = events[0].parcel;
         var carrier = events[0].carrier;
         var latestEvent = events[events.length - 1];
+        var logoCarrier = '//assets.aftership.com/couriers/svg/' + carrier.slug_name + '.svg';
         return (
             <div className="row">
                 <div className="col-xs-12"><p id="tracking-number"
@@ -62,7 +63,7 @@ var ShipmentDetail = React.createClass({
                 <div className="col-xs-12">
                     <div className="col-xs-12 courier-info media m-y-1">
                         <div className="media-left"><a href="">
-                            <img src={'//assets.aftership.com/couriers/svg/ups.svg'} width="64"
+                            <img src={logoCarrier} width="64"
                                  height="64"/>
                         </a>
                         </div>
