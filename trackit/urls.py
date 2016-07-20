@@ -21,6 +21,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^docs/', include('rest_framework_swagger.urls')),
     url(r'^api/v1/', include('app.urls', namespace="api")),
-    url('^.*$', TemplateView.as_view(template_name='aaa.html')),
+    url('^.*$', TemplateView.as_view(template_name='index.html')),
 
 ]

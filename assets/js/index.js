@@ -6,118 +6,111 @@ var Link = require('react-router').Link
 var browserHistory = require('react-router').browserHistory
 var Config = require('Config')
 
-var Welcome = React.createClass({
+
+var Welcome1 = React.createClass({
     render: function () {
         return (
-            <h1>
-                Tracking your parcel!
-            </h1>
-        )
-    }
-});
-
-var InputForm = React.createClass({
-    getInitialState: function () {
-        return {parcelId: ''};
-    },
-    handleParcelIdChange: function (e) {
-        this.setState({parcelId: e.target.value.trim().toUpperCase()});
-    },
-    handleSubmit: function (e) {
-        e.preventDefault();
-        var parcelId = this.state.parcelId.trim();
-        if (!parcelId) {
-            return;
-        }
-
-        $.ajax({
-            url: Config.serverUrl + "/api/v1/task/",
-            dataType: 'json',
-            type: 'POST',
-            data: {"parcel_id": parcelId},
-            success: function (task) {
-                (function poll() {
-                    $.ajax({
-                        url: Config.serverUrl + "/api/v1/task/?task_id=" + task.task_id,
-                        type: "GET",
-                        success: function (events) {
-                            console.log(events);
-                            ReactDOM.render(
-                                <EventList events={events}/>,
-                                document.getElementById('container-events')
-                            );
-                        }, dataType: "json", error: poll, timeout: 30000
-                    });
-                })();
-            }.bind(this),
-            error: function (xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
-            }.bind(this)
-        });
-    },
-    render: function () {
-        return (
-            <form className="form-inline" onSubmit={this.handleSubmit}>
-                <input
-                    className="form-control"
-                    type="text"
-                    placeholder="Enter your parcel id"
-                    value={this.state.parcelId}
-                    onChange={this.handleParcelIdChange}
-                />
-                <input className="btn btn-primary" type="submit" value="Track"/>
-            </form>
-        );
-    }
-});
-
-
-var Home = React.createClass({
-    render: function () {
-        return (
-            <div>
-                <Welcome />
-                <InputForm />
-            </div>
-        )
-    }
-});
-
-
-var EventItem = React.createClass({
-    render: function () {
-        return (
-            <div className={this.props.pClassName}>
-                {this.props.value}
-            </div>
-        )
-    }
-});
-
-var EventList = React.createClass({
-    render: function () {
-        var events = this.props.events;
-        return (
-            <div className="events">
-                {
-                    events.map(function (event, i) {
-                        return (
-                            <div key={i} className="event-detail">
-                                <EventItem value={event.event_name} pClassName="event-name"/>
-                                <EventItem value={event.event_time} pClassName="event-time"/>
-                                <EventItem value={event.event_location} pClassName="event-location"/>
+            <div className="page-content-wrapper text-09">
+                <div className="container-fluid">
+                    <div className="row title-row">
+                        <div className="col-xs-12">
+                            <div className="pull-sm-left store-home"><a href="http://www.aftership.com"
+                                                                        className="store-home--text">AfterShip</a>
                             </div>
-                        );
-                    })
-                }
+                        </div>
+                    </div>
+                </div>
             </div>
-        );
+        )
+    }
+});
+
+var Footer = React.createClass({
+    render: function () {
+        return (
+                <div className="row m-y-3">
+                    <div className="col-md-6 text-xs-center text-md-left text-muted">
+                        <ul className="ui-list">
+                            <li className="powered-by-aftership">Powered by <a
+                                href="https://www.aftership.com">AfterShip</a>
+                            </li>
+                            <li><a href="https://www.aftership.com/terms" className="link--muted">Terms</a></li>
+                            <li><a href="https://www.aftership.com/privacy" className="link--muted">Privacy</a></li>
+                        </ul>
+                    </div>
+                </div>
+        )
+    }
+});
+
+
+var Welcome2 = React.createClass({
+    render: function () {
+        return (
+            <div className="page-content-wrapper text-09">
+                <div className="container-fluid">
+                    <div className="row title-row">
+                        <div className="col-xs-12">
+                            <div className="pull-sm-left store-home"><a href="http://www.aftership.com"
+                                                                        className="store-home--text">AfterShip</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="block m-b-2">
+                        <div className="row">
+                            <div className="col-xs-12"><p id="tracking-number"
+                                                          className="tracking-number--bar text-xs-center m-b-0">
+                                1ZY8V5520457704777</p></div>
+                            <div className="col-xs-12">
+                                <div className="col-xs-12 courier-info media m-y-1">
+                                    <div className="media-left"><a href="https://www.aftership.com/courier/ups">
+                                        <img src={'//assets.aftership.com/couriers/svg/ups.svg'} width="64"
+                                             height="64"/>
+                                    </a>
+                                    </div>
+                                    <div className="media-right"><a href="https://www.aftership.com/courier/ups"
+                                                                    className="link--black"><h2
+                                        className="h4 notranslate">UPS</h2></a><a
+                                        href="tel:1800834834" className="link--phone">1800834834</a></div>
+                                </div>
+                            </div>
+                            <div className="col-xs-12">
+                                <div className="clearfix text-xs-center tag-delivered additional-info">
+                                    <div className="col-sm-6"><p className="tag text-tight">Delivered</p></div>
+                                    <div className="col-sm-6"><p className="text-tight">Signed by: BEN</p></div>
+                                </div>
+                            </div>
+                            <div className="col-xs-12">
+                                <div className="checkpoints">
+                                    <ul className="checkpoints__list">
+                                        <li className="checkpoint">
+                                            <div className="checkpoint__time"><strong>Jul 19, 2016</strong>
+                                                <div className="hint">03:00 pm</div>
+                                            </div>
+                                            <div className="checkpoint__icon delivered"></div>
+                                            <div className="checkpoint__content"><strong>Delivered<span
+                                                className="checkpoint__courier-name">UPS</span></strong>
+                                                <div className="hint">GIVATAYIM, IL, 53401</div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
     }
 });
 
 ReactDOM.render((
     <Router history={browserHistory}>
-        <Route path="/" component={Home}/>
+        <Route path="/" component={Welcome1}/>
+        <Route path="/:parcelId" component={Welcome2}/>
     </Router>
+), document.getElementById('page'));
 
-), document.getElementById('container'));
+ReactDOM.render((
+    <Footer></Footer>
+), document.getElementById('footer'));
