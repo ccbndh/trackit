@@ -56,6 +56,7 @@ class GHNSpider(BaseSpider):
                     location = detail.getchildren()[2].text_content()
                 else:
                     detail_list = detail.getchildren()[0].getchildren()
+                    detail_list = detail_list[::-1] # resort, last event in first
                     for e in detail_list:
                         event_dict = {}
                         temp = e.getchildren()
