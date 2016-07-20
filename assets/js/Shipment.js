@@ -2,12 +2,40 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var Config = require('Config');
 
+
+var EventListDetail = React.createClass({
+    render: function () {
+        var events = this.props.events;
+        return (
+            <div className="checkpoints">
+                <ul id="events" className="checkpoints__list">
+                    {
+                        events.map(function (event, i) {
+                            return (
+                                <li key={i} className="checkpoint">
+                                    <div className="checkpoint__time"><strong>{event.event_time}</strong>
+                                        <div className="hint"></div>
+                                    </div>
+                                    <div className="checkpoint__icon delivered"></div>
+                                    <div className="checkpoint__content"><strong>{event.event_name}</strong>
+                                        <div className="hint">{event.event_location}</div>
+                                    </div>
+                                </li>
+                            );
+                        })
+                    }
+                </ul>
+            </div>
+        );
+    }
+});
+
 var ShipmentDetail = React.createClass({
     render: function () {
         var events = this.props.events;
         var parcel = events[0].parcel;
         var carrier = events[0].carrier;
-        var latestEvent = events[events.length-1];
+        var latestEvent = events[events.length - 1];
         return (
             <div className="row">
                 <div className="col-xs-12"><p id="tracking-number"
@@ -33,20 +61,7 @@ var ShipmentDetail = React.createClass({
                     </div>
                 </div>
                 <div className="col-xs-12">
-                    <div className="checkpoints">
-                        <ul className="checkpoints__list">
-                            <li className="checkpoint">
-                                <div className="checkpoint__time"><strong>Jul 19, 2016</strong>
-                                    <div className="hint">03:00 pm</div>
-                                </div>
-                                <div className="checkpoint__icon delivered"></div>
-                                <div className="checkpoint__content"><strong>Delivered<span
-                                    className="checkpoint__courier-name">UPS</span></strong>
-                                    <div className="hint">GIVATAYIM, IL, 53401</div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                    <EventListDetail events={events}/>
                 </div>
             </div>
         )
