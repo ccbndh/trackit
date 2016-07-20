@@ -1,8 +1,86 @@
 var React = require('react');
+var ReactDOM = require('react-dom');
+var Config = require('Config');
+
+var ShipmentDetail = React.createClass({
+    render: function () {
+        var events = this.props.events;
+        var parcel = events[0].parcel;
+        var carrier = events[0].carrier;
+        var latestEvent = events[events.length-1];
+        return (
+            <div className="row">
+                <div className="col-xs-12"><p id="tracking-number"
+                                              className="tracking-number--bar text-xs-center m-b-0">
+                    {parcel.parcel_id}</p></div>
+                <div className="col-xs-12">
+                    <div className="col-xs-12 courier-info media m-y-1">
+                        <div className="media-left"><a href="">
+                            <img src={'//assets.aftership.com/couriers/svg/ups.svg'} width="64"
+                                 height="64"/>
+                        </a>
+                        </div>
+                        <div className="media-right"><a href=""
+                                                        className="link--black"><h2
+                            className="h4 notranslate">{carrier.name}</h2></a><a
+                            href="tel:1800834834" className="link--phone">{carrier.carrier_cs_phone}</a></div>
+                    </div>
+                </div>
+                <div className="col-xs-12">
+                    <div className="clearfix text-xs-center tag-delivered additional-info">
+                        <div className="col-sm-6"><p className="tag text-tight">{parcel.status}</p></div>
+                        <div className="col-sm-6"><p className="text-tight">{latestEvent.event_name}</p></div>
+                    </div>
+                </div>
+                <div className="col-xs-12">
+                    <div className="checkpoints">
+                        <ul className="checkpoints__list">
+                            <li className="checkpoint">
+                                <div className="checkpoint__time"><strong>Jul 19, 2016</strong>
+                                    <div className="hint">03:00 pm</div>
+                                </div>
+                                <div className="checkpoint__icon delivered"></div>
+                                <div className="checkpoint__content"><strong>Delivered<span
+                                    className="checkpoint__courier-name">UPS</span></strong>
+                                    <div className="hint">GIVATAYIM, IL, 53401</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+});
 
 var Shipment = React.createClass({
     render: function () {
-        this.props.params.parcelId = this.props.params.parcelId.trim().toUpperCase();
+        var parcelId = this.props.params.parcelId.trim().toUpperCase();
+        $.ajax({
+            url: Config.serverUrl + "/api/v1/task/",
+            dataType: 'json',
+            type: 'POST',
+            data: {"parcel_id": parcelId},
+            success: function (task) {
+                (function poll() {
+                    $.ajax({
+                        url: Config.serverUrl + "/api/v1/task/?task_id=" + task.task_id,
+                        type: "GET",
+                        success: function (events) {
+                            console.log(events);
+                            ReactDOM.render(
+                                <ShipmentDetail events={events}/>,
+                                document.getElementById('shipment')
+                            );
+                        }, dataType: "json", error: poll, timeout: 30000
+                    });
+                })();
+            }.bind(this),
+            error: function (xhr, status, err) {
+                console.error(this.props.url, status, err.toString());
+            }.bind(this)
+        });
+
         return (
             <div className="page-content-wrapper text-09">
                 <div className="container-fluid">
@@ -13,47 +91,8 @@ var Shipment = React.createClass({
                             </div>
                         </div>
                     </div>
-                    <div className="block m-b-2">
-                        <div className="row">
-                            <div className="col-xs-12"><p id="tracking-number"
-                                                          className="tracking-number--bar text-xs-center m-b-0">
-                                {this.props.params.parcelId}</p></div>
-                            <div className="col-xs-12">
-                                <div className="col-xs-12 courier-info media m-y-1">
-                                    <div className="media-left"><a href="">
-                                        <img src={'//assets.aftership.com/couriers/svg/ups.svg'} width="64"
-                                             height="64"/>
-                                    </a>
-                                    </div>
-                                    <div className="media-right"><a href=""
-                                                                    className="link--black"><h2
-                                        className="h4 notranslate">UPS</h2></a><a
-                                        href="tel:1800834834" className="link--phone">1800834834</a></div>
-                                </div>
-                            </div>
-                            <div className="col-xs-12">
-                                <div className="clearfix text-xs-center tag-delivered additional-info">
-                                    <div className="col-sm-6"><p className="tag text-tight">Delivered</p></div>
-                                    <div className="col-sm-6"><p className="text-tight">Signed by: BEN</p></div>
-                                </div>
-                            </div>
-                            <div className="col-xs-12">
-                                <div className="checkpoints">
-                                    <ul className="checkpoints__list">
-                                        <li className="checkpoint">
-                                            <div className="checkpoint__time"><strong>Jul 19, 2016</strong>
-                                                <div className="hint">03:00 pm</div>
-                                            </div>
-                                            <div className="checkpoint__icon delivered"></div>
-                                            <div className="checkpoint__content"><strong>Delivered<span
-                                                className="checkpoint__courier-name">UPS</span></strong>
-                                                <div className="hint">GIVATAYIM, IL, 53401</div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                    <div id="shipment" className="block m-b-2">
+
                     </div>
                 </div>
             </div>
