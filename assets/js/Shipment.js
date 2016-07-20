@@ -2,6 +2,7 @@ var React = require('react');
 
 var Shipment = React.createClass({
     render: function () {
+        this.props.params.parcelId = this.props.params.parcelId.trim().toUpperCase();
         return (
             <div className="page-content-wrapper text-09">
                 <div className="container-fluid">
@@ -16,7 +17,7 @@ var Shipment = React.createClass({
                         <div className="row">
                             <div className="col-xs-12"><p id="tracking-number"
                                                           className="tracking-number--bar text-xs-center m-b-0">
-                                1ZY8V5520457704777</p></div>
+                                {this.props.params.parcelId}</p></div>
                             <div className="col-xs-12">
                                 <div className="col-xs-12 courier-info media m-y-1">
                                     <div className="media-left"><a href="">
