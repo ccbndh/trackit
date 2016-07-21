@@ -56,7 +56,6 @@ class GHNSpider(BaseSpider):
                     location = detail.getchildren()[2].text_content()
                 else:
                     detail_list = detail.getchildren()[0].getchildren()
-                    detail_list = detail_list[::-1] # resort, last event in first
                     for e in detail_list:
                         event_dict = {}
                         temp = e.getchildren()
@@ -64,6 +63,7 @@ class GHNSpider(BaseSpider):
                         event_dict['event_time'] = temp[2].getchildren()[1].text_content()
                         event_dict['event_location'] = location
                         self.base_raw_data['events_details'].append(event_dict)
+            self.base_raw_data['events_details'] = self.base_raw_data['events_details'][::-1]
         except Exception as error:
             pass
         return self.base_raw_data
