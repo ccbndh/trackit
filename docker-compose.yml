@@ -11,6 +11,10 @@ services:
     image: ccbndh/trackit
     environment:
       C_FORCE_ROOT: "yes"
+      DB_USER: postgres
+      DB_PASSWORD: ''
+      DB_NAME: postgres
+      DB_HOST: db
     volumes:
       - .:/code
     ports:
