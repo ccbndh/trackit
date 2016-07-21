@@ -21,6 +21,7 @@ script:
   - docker info
   - docker -v
   - docker-compose -v
+  - cp docker-compose.yml.dev docker-compose.yml
   - docker-compose build
   - docker-compose up -d
   - sleep 3
