@@ -54,6 +54,7 @@ var ShipmentDetail = React.createClass({
         var parcel = events[0].parcel;
         var carrier = events[0].carrier;
         var latestEvent = events[events.length - 1];
+        document.title = Config.mainTitle + " - " + carrier.name + " - " + parcel.parcel_id;
         var logoCarrier = '//assets.aftership.com/couriers/svg/' + carrier.slug_name + '.svg';
         return (
             <div className="row">
