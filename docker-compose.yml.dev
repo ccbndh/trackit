@@ -1,0 +1,25 @@
+version: '2'
+services:
+  rabbitmq:
+    image: rabbitmq
+  db:
+    image: postgres
+    ports:
+      - "54322:5432"
+  web:
+    # build: .
+    image: ccbndh/trackit
+    environment:
+      C_FORCE_ROOT: "yes"
+      DB_USER: postgres
+      DB_PASSWORD: ''
+      DB_NAME: postgres
+      DB_HOST: db
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+      - "5555:5555"
+    depends_on:
+      - rabbitmq
+      - db
