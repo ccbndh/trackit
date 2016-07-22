@@ -21,6 +21,8 @@ class ParcelSerializer(serializers.ModelSerializer):
 class CarrierSerializer(serializers.ModelSerializer):
     class Meta:
         model = Carrier
+        fields = ("id", "name", "slug_name", "carrier_id", "carrier_language", "carrier_cs_phone", "carrier_url",
+                  "carrier_url_tracking", "carrier_support_languages", "carrier_countries_iso")
 
 
 class EventNestedSerializer(serializers.ModelSerializer):
