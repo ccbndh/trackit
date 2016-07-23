@@ -9,9 +9,8 @@ var ShipmentNotFound = React.createClass({
                 <div className="container-fluid">
                     <div className="row title-row">
                         <div className="col-xs-12">
-                            <div className="pull-sm-left store-home"><a href=""
-                                                                        className="store-home--text"></a>
-                                We can track your parcel
+                            <div className="pull-sm-left store-home">
+                                We can't track your parcel
                             </div>
                         </div>
                     </div>
