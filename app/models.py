@@ -70,6 +70,7 @@ Severe weather conditions have delayed delivery.
 '''
 
 STATUS_DELIVER = (
+    (0, ""),
     (1, "Info Received"),
     (2, "In transit"),
     (3, "Out for Delivery"),
