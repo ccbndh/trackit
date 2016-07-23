@@ -71,7 +71,7 @@ var ShipmentDetail = React.createClass({
                         <div className="media-right"><a href=""
                                                         className="link--black"><h2
                             className="h4 notranslate">{carrier.name}</h2></a><a
-                            href="tel:1800834834" className="link--phone">{carrier.carrier_cs_phone}</a></div>
+                            href={"tel:" + carrier.carrier_cs_phone} className="link--phone">{carrier.carrier_cs_phone}</a></div>
                     </div>
                 </div>
                 <div className="col-xs-12">
