@@ -114,7 +114,7 @@ var Shipment = React.createClass({
                                 );
                             }
                         }, error: function (event) {
-                            setTimeout(poll, 1000);
+                            setTimeout(poll, 2000);
                         }
                     });
                 })();
