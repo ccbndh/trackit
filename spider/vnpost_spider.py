@@ -77,13 +77,13 @@ class VnpostSpider(BaseSpider):
                 event_dict['event_name'] = event_name
                 event_location = list_event_elm[1].getchildren()[0].text_content().strip()
                 event_dict['event_location'] = event_location
-                self.base_raw_data['events_summary'].append(event_dict)
+                self.base_raw_data['events_details'].insert(0, event_dict)
+                # self.base_raw_data['events_details'].append(event_dict)
         except Exception as error:
             pass
-
         return self.base_raw_data
 
 
 if __name__ == '__main__':
-    vnpost = VnpostSpider('EL745355158vn')
+    vnpost = VnpostSpider('EV556308105VN', 'vnpost')
     print vnpost.normalize()
