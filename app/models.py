@@ -102,6 +102,8 @@ class Event(models.Model):
 @receiver(pre_save, sender=Event)
 def get_delivery_status_on_save(sender, instance, **kwargs):
     carrier = instance.carrier
-    for mapper in carrier.mapper:
-        if mapper in instance.event_name:
-            instance.delivery_status = int(carrier.mapper[mapper])
+    carrier_mapper = carrier.mapper
+    if carrier_mapper:
+        for mapper in carrier_mapper:
+            if instance.event_name and mapper in instance.event_name:
+                instance.delivery_status = int(carrier.mapper[mapper])
