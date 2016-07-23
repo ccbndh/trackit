@@ -61,3 +61,41 @@ class Event(models.Model):
 
     def __str__(self):
         return unicode(self.event_name)
+
+
+'''
+INFO RECEIVED
+Order Processed: Ready for UPS
+
+In Transit
+Departure Scan
+
+Out For Delivery
+Out For Delivery
+
+Delivered:
+Package delivered by local post office
+
+Failed Attempt:
+The receiver was not available at the time of the first delivery attempt. A second attempt will be made
+
+Exception
+Severe weather conditions have delayed delivery.
+'''
+
+STATUS_DELIVER = (
+    (1, "Info Received"),
+    (2, "In transit"),
+    (3, "Out for Delivery"),
+    (4, "Delivered"),
+    (5, "Failed Attempt"),
+    (6, "Exception")
+)
+
+
+@python_2_unicode_compatible  # only if you need to support Python 2
+class EventMaster(models.Model):
+    status = models.IntegerField(choices=STATUS_DELIVER, default=1)
+
+    def __str__(self):
+        return unicode(self.state)
