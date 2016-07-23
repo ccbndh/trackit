@@ -53,12 +53,7 @@ class TaskList(APIView):
         parcel_id = request.data.get('parcel_id')
         try:
             if parcel_id:
-                task = task_get_data_from_spider.apply_async([parcel_id], expires=60, retry=True, retry_policy={
-                    'max_retries': 2,
-                    'interval_start': 0,
-                    'interval_step': 0.2,
-                    'interval_max': 0.2,
-                })
+                task = task_get_data_from_spider.apply_async([parcel_id], expires=90, retry=True)
                 return Response({'task_id': task.task_id}, status=status.HTTP_201_CREATED)
         except Exception as err:
             return Response({'message': err}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
