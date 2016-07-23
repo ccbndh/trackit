@@ -5,6 +5,9 @@ from django.contrib.postgres.fields import JSONField, ArrayField
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
+
 
 @python_2_unicode_compatible  # only if you need to support Python 2
 class Carrier(models.Model):
@@ -18,6 +21,7 @@ class Carrier(models.Model):
     carrier_support_languages = ArrayField(models.CharField(max_length=50), null=True, blank=True)
     comments = models.CharField(max_length=200, null=True, blank=True)
     carrier_countries_iso = ArrayField(models.CharField(max_length=200), null=True, blank=True)
+    mapper = JSONField(null=True, blank=True)
 
     pattern_regex = ArrayField(models.CharField(max_length=1000), null=True, blank=True)
 
@@ -93,3 +97,11 @@ class Event(models.Model):
 
     def __str__(self):
         return unicode(self.event_name)
+
+
+@receiver(pre_save, sender=Event)
+def get_delivery_status_on_save(sender, instance, **kwargs):
+    carrier = instance.carrier
+    for mapper in carrier.mapper:
+        if mapper in instance.event_name:
+            instance.delivery_status = int(carrier.mapper[mapper])

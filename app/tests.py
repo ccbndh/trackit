@@ -19,7 +19,7 @@ class AddTestCase(TestCase):
     # def test_model(self):
     #     # TODO Only test syntax, must be assertEqual in this test case
     #
-    #     parcel_id = 'EL745355158VN'
+    #     parcel_id = 'EV556308105VN'
     #     carrier = carrier_identify(parcel_id)
     #     if carrier:
     #         spider = eval(CARRIER_SPIDER[carrier.slug_name])(parcel_id, carrier.slug_name)
