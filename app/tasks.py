@@ -26,12 +26,11 @@ def task_get_data_from_spider(parcel_id):
 
     # create or update parcel by parcel_id
     parcel = result.get('parcel')
-    parcel_serializer = ParcelSerializer(data=parcel, partial=True)  # normalize data from spider
-    if parcel_serializer.is_valid():
-        parcel_obj, _ = Parcel.objects.update_or_create(parcel_id=parcel.get('parcel_id'),
-                                                        defaults=parcel_serializer.data)
-    else:
-        parcel_obj = Parcel.objects.get(parcel_id=parcel.get('parcel_id'))
+    parcel_obj, _ = Parcel.objects.get_or_create(parcel_id=parcel.get('parcel_id'))
+    serializer = ParcelSerializer(parcel_obj, data=parcel, partial=True)
+    serializer.is_valid()
+    serializer.validated_data
+    serializer.save()
 
     # get carrier
     carrier = result.get('carrier')
