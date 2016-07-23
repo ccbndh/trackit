@@ -49,20 +49,6 @@ class Parcel(models.Model):
         return unicode(self.parcel_id)
 
 
-@python_2_unicode_compatible  # only if you need to support Python 2
-class Event(models.Model):
-    parcel = models.ForeignKey(Parcel)
-    carrier = models.ForeignKey(Carrier, null=True)
-    event_name = models.CharField(max_length=500, null=True, blank=True)
-    event_time = models.CharField(max_length=500, null=True, blank=True)
-    event_location = models.CharField(max_length=500, null=True, blank=True)
-    additional_params = JSONField(null=True, blank=True)
-    parsed_event_time = models.DateTimeField(null=True)
-
-    def __str__(self):
-        return unicode(self.event_name)
-
-
 '''
 INFO RECEIVED
 Order Processed: Ready for UPS
@@ -94,8 +80,15 @@ STATUS_DELIVER = (
 
 
 @python_2_unicode_compatible  # only if you need to support Python 2
-class EventMaster(models.Model):
-    status = models.IntegerField(choices=STATUS_DELIVER, default=1)
+class Event(models.Model):
+    parcel = models.ForeignKey(Parcel)
+    carrier = models.ForeignKey(Carrier, null=True)
+    event_name = models.CharField(max_length=500, null=True, blank=True)
+    event_time = models.CharField(max_length=500, null=True, blank=True)
+    event_location = models.CharField(max_length=500, null=True, blank=True)
+    delivery_status = models.IntegerField(choices=STATUS_DELIVER, default=0)
+    additional_params = JSONField(null=True, blank=True)
+    parsed_event_time = models.DateTimeField(null=True)
 
     def __str__(self):
-        return unicode(self.state)
+        return unicode(self.event_name)
