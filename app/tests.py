@@ -68,13 +68,13 @@ class AddTestCase(TestCase):
         parcel_id = 'EL745355158VN'
         result = task_get_data_from_spider.delay(parcel_id)
         self.assertTrue(result.successful())
-        self.assertEqual(len(result.result), 11, "Should return 11 list event")
+        self.assertEqual(len(result.result), 13, "Should return 11 list event")
         parcel_id_res = result.result[0].get('parcel').get('parcel_id')
         self.assertEqual(parcel_id, parcel_id_res, "Should return true parcel_id")
 
         # on enter parcel_id 2nd
         result = task_get_data_from_spider.delay(parcel_id)
         self.assertTrue(result.successful())
-        self.assertEqual(len(result.result), 11, "Should return 11 list event")
+        self.assertEqual(len(result.result), 13, "Should return 11 list event")
         parcel_id_res = result.result[0].get('parcel').get('parcel_id')
         self.assertEqual(parcel_id, parcel_id_res, "Should return true parcel_id")
