@@ -68,7 +68,7 @@ class VnpostSpider(BaseSpider):
 
         try:
             list_summary_event = tree.find_class('table-done')[0].getchildren()
-            for e in list_summary_event[1:]:
+            for e in list_summary_event[1:][::-1]:
                 event_dict = {}
                 list_event_elm = e.getchildren()
                 event_time = list_event_elm[0].text_content().strip()
