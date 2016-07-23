@@ -100,6 +100,7 @@ var Shipment = React.createClass({
                     $.ajax({
                         url: Config.serverUrl + "/api/v1/task/?task_id=" + task.task_id,
                         type: "GET",
+                        dataType: "json",
                         success: function (events) {
                             if(events.length > 0) {
                                 ReactDOM.render(
@@ -112,7 +113,9 @@ var Shipment = React.createClass({
                                     document.getElementById('shipment')
                                 );
                             }
-                        }, dataType: "json", error: poll, timeout: 30000
+                        }, error: function (event) {
+                            setTimeout(poll, 1000);
+                        }
                     });
                 })();
             }.bind(this),
