@@ -26,6 +26,13 @@ module.exports = {
             $: 'jquery',
             jQuery: 'jquery',
             'window.jQuery': 'jquery'
+        }),
+
+        // minifies your code
+        new webpack.optimize.UglifyJsPlugin({
+            compressor: {
+            warnings: false
+          }
         })
     ],
 
