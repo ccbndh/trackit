@@ -51,7 +51,10 @@ class TaskList(APIView):
               message: '{"message": "", "data": ""}'
         """
         parcel_id = request.data.get('parcel_id')
-        if parcel_id:
-            task = task_get_data_from_spider.delay(parcel_id)
-            return Response({'task_id': task.task_id}, status=status.HTTP_201_CREATED)
+        try:
+            if parcel_id:
+                task = task_get_data_from_spider.delay(parcel_id)
+                return Response({'task_id': task.task_id}, status=status.HTTP_201_CREATED)
+        except Exception as err:
+            return Response({'message': err}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         return Response({'message': 'Parcel id must be not empty'}, status=status.HTTP_400_BAD_REQUEST)
