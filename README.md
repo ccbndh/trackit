@@ -10,10 +10,10 @@ How to run with docker:
 2. docker-compose up -d   
 
 API add task, get result...
-http://192.168.99.100:8000/docs/
+http://127.0.0.1:8000/docs/
 
 Follow the status task by flower:   
-http://192.168.99.100:5555/   
+http://127.0.0.1:5555/
 
 
 
