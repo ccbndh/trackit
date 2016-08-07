@@ -55,7 +55,7 @@ module.exports = {
     },
     externals: {
       'Config': JSON.stringify(process.env.ENV === 'production' ? {
-          serverUrl: "http://54.254.219.165:8000",
+          serverUrl: "http://52.220.55.255:8000",
           mainTitle: "Track order status"
       } : {
           serverUrl: "http://127.0.0.1:8000",
